@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav v-if="this.$store.state.isHome === false">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
@@ -28,3 +28,18 @@ nav {
   }
 }
 </style>
+
+<script>
+export default {
+  name: 'App',
+  watch: {
+    $route (to, _from) {
+      if (to.path === '/') {
+        this.$store.commit('changeIsHome', true)
+      } else {
+        this.$store.commit('changeIsHome', false)
+      }
+    }
+  }
+}
+</script>>
