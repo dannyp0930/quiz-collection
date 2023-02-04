@@ -50,6 +50,22 @@ nav {
     transform: none;
   }
 }
+
+article {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+header {
+  border: 2px solid black;
+  border-radius: 1rem;
+}
+
+section {
+  border: 2px solid black;
+  border-radius: 1rem;
+}
 </style>
 
 <script>
