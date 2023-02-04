@@ -23,6 +23,7 @@
   column-gap: 1.5rem;
 
   a {
+    padding: 1rem;
     font-size: 2rem;
     text-decoration: none;
     border: 2px solid black;
