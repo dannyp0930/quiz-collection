@@ -1,16 +1,26 @@
 <template>
-  <div class="home">
-    <nav class="home-container">
-      <router-link to="/about">About</router-link>
+  <main class="home">
+    <nav class="home-nav">
+      <router-link to="/idiom">사자성어</router-link>
+      <router-link to="/music">음악퀴즈</router-link>
+      <router-link to="/character">인물퀴즈</router-link>
+      <router-link to="/capital">수도퀴즈</router-link>
     </nav>
-  </div>
+  </main>
 </template>
 
 <style lang="scss">
-.home-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 1rem;
+.home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-nav {
+  display: flex;
+  justify-content: center;
+  column-gap: 1.5rem;
 
   a {
     font-size: 2rem;
