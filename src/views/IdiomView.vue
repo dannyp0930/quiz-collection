@@ -24,29 +24,36 @@
           <button type="submit">시작</button>
         </form>
       </header>
-      <IdiomQuiz />
-      <section>
-        <form >
+      <IdiomReady v-if="stage === 1"/>
+      <IdiomStart v-if="stage === 2"/>
+      <IdiomEnd v-if="stage === 3"/>
+      <section v-if="stage === 1 || stage === 2">
+        <form v-on:submit="submitAnswer">
           <input type="text">
+          <p>정답 : {{ this.correct }} / {{ this.cntSelect }}</p>
         </form>
-        <p>정답 : </p>
       </section>
     </article>
   </main>
 </template>
 
 <script>
-import IdiomQuiz from '@/components/Idiom/IdiomQuiz.vue'
-import data from '@/assets/idioms.json'
+import IdiomReady from '@/components/Idiom/IdiomReady.vue'
+import IdiomStart from '@/components/Idiom/IdiomStart.vue'
+import IdiomEnd from '@/components/Idiom/IdiomEnd.vue'
+import idioms from '@/assets/idioms.json'
 import randomPickArr from '@/utils/randomPickArr'
 
 export default {
   name: 'IdiomView',
   components: {
-    IdiomQuiz
+    IdiomReady,
+    IdiomStart,
+    IdiomEnd
   },
   data () {
     return {
+      stage: 0,
       cntSelect: 5,
       cntSelectList: [
         { name: '5개', value: 5 },
@@ -62,18 +69,27 @@ export default {
         { name: '8초', value: 8 },
         { name: '9초', value: 9 },
         { name: '10초', value: 10 }
-      ]
+      ],
+      correct: 0
     }
   },
   methods: {
     submitForm (e) {
       e.preventDefault()
-      const length = data.length
+      const length = idioms.length
       const cnt = this.cntSelect
       const time = this.timeSelect
       const idxList = randomPickArr(length, cnt)
-      const res = idxList.map((idx) => data.results[idx])
+      const res = idxList.map((idx) => idioms[idx])
       this.$store.commit('setIdioms', res, time)
+      this.start = true
+      this.stage = 1
+      setTimeout(() => {
+        this.stage = 2
+      }, 5000)
+    },
+    submitAnswer (e) {
+      e.preventDefault()
     }
   }
 }
