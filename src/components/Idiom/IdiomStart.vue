@@ -1,9 +1,6 @@
 <template>
   <section>
     <h1>{{ this.idioms[idx].meaning }}</h1>
-    {{ this }}
-  </section>
-  <section>
     <form v-on:submit="submitAnswer">
       <input type="text" ref="answer" v-model="answer" autofocus>
       <p>정답 : {{ this.correct }} / {{ this.cnt }}</p>

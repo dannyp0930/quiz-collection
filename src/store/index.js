@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     isHome: true,
+    idiomStage: 0,
     idioms: [],
     idiomCnt: 0,
     idiomTime: 0
@@ -12,6 +13,9 @@ export default createStore({
   mutations: {
     changeIsHome (state, bool) {
       state.isHome = bool
+    },
+    setIdiomStage (state, stage) {
+      state.idiomStage = stage
     },
     setIdioms (state, arr) {
       state.idioms = arr
