@@ -75,19 +75,16 @@ export default {
       const audio = new Audio(beepSrc)
       audio.volume = 1
       audio.play()
-      for (let i = 1; i < 5; i++) {
-        setTimeout(() => {
-          audio.play()
-          this.time -= 1
-        }, 1000 * i)
-      }
-      setTimeout(() => {
-        this.$store.commit('setIdiomStage', 1)
-      }, 5000)
-    },
-    submitAnswer (e) {
-      e.preventDefault()
-      console.log(this.answer)
+      // for (let i = 1; i < 5; i++) {
+      //   setTimeout(() => {
+      //     audio.play()
+      //     this.time -= 1
+      //   }, 1000 * i)
+      // }
+      // setTimeout(() => {
+      //   this.$store.commit('setIdiomStage', 1)
+      // }, 5000)
+      this.$store.commit('setIdiomStage', 1)
     }
   }
 }
