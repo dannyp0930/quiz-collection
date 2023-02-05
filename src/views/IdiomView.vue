@@ -4,7 +4,7 @@
       <header>
         <h1>사자성어</h1>
         <p>뜻을 보고 올바른 사자성어를 맞추세요</p>
-        <form v-on:submit="submitForm">
+        <form v-if="stage === 0" v-on:submit="submitForm">
           <label for="idiom-cnt-select">개수</label>
           <select id="idiom-cnt-select" v-model="cntSelect">
             <option
@@ -24,15 +24,8 @@
           <button type="submit">시작</button>
         </form>
       </header>
-      <IdiomReady v-if="stage === 1"/>
-      <IdiomStart v-if="stage === 2"/>
-      <IdiomEnd v-if="stage === 3"/>
-      <section v-if="stage === 1 || stage === 2">
-        <form v-on:submit="submitAnswer">
-          <input type="text">
-          <p>정답 : {{ this.correct }} / {{ this.cntSelect }}</p>
-        </form>
-      </section>
+      <IdiomReady v-if="stage === 1" />
+      <IdiomStart v-if="stage === 2" />
     </article>
   </main>
 </template>
@@ -40,7 +33,6 @@
 <script>
 import IdiomReady from '@/components/Idiom/IdiomReady.vue'
 import IdiomStart from '@/components/Idiom/IdiomStart.vue'
-import IdiomEnd from '@/components/Idiom/IdiomEnd.vue'
 import idioms from '@/assets/idioms.json'
 import randomPickArr from '@/utils/randomPickArr'
 
@@ -48,8 +40,7 @@ export default {
   name: 'IdiomView',
   components: {
     IdiomReady,
-    IdiomStart,
-    IdiomEnd
+    IdiomStart
   },
   data () {
     return {
@@ -69,8 +60,7 @@ export default {
         { name: '8초', value: 8 },
         { name: '9초', value: 9 },
         { name: '10초', value: 10 }
-      ],
-      correct: 0
+      ]
     }
   },
   methods: {
@@ -81,8 +71,9 @@ export default {
       const time = this.timeSelect
       const idxList = randomPickArr(length, cnt)
       const res = idxList.map((idx) => idioms[idx])
-      this.$store.commit('setIdioms', res, time)
-      this.start = true
+      this.$store.commit('setIdioms', res)
+      this.$store.commit('setIdiomCnt', cnt)
+      this.$store.commit('setIdiomTime', time)
       this.stage = 1
       setTimeout(() => {
         this.stage = 2
@@ -90,6 +81,7 @@ export default {
     },
     submitAnswer (e) {
       e.preventDefault()
+      console.log(this.answer)
     }
   }
 }

@@ -4,7 +4,8 @@ export default createStore({
   state: {
     isHome: true,
     idioms: [],
-    idiomTime: 5
+    idiomCnt: 0,
+    idiomTime: 0
   },
   getters: {
   },
@@ -12,8 +13,13 @@ export default createStore({
     changeIsHome (state, bool) {
       state.isHome = bool
     },
-    setIdioms (state, arr, time) {
+    setIdioms (state, arr) {
       state.idioms = arr
+    },
+    setIdiomCnt (state, cnt) {
+      state.idiomCnt = cnt
+    },
+    setIdiomTime (state, time) {
       state.idiomTime = time
     }
   },
