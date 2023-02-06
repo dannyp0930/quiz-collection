@@ -22,7 +22,7 @@ export default {
       time: this.$store.state.idiomTime,
       idx: 0,
       answer: '',
-      correctCnt: 0
+      correctCnt: this.$store.state.idiomCorrectCnt
     }
   },
   methods: {
@@ -34,8 +34,7 @@ export default {
         console.log('정답')
         this.idx++
         this.answer = ''
-        this.correctCnt++
-        return null
+        this.$store.commit('setIdiomCorrectCnt', this.correctCnt + 1)
       } else {
         console.log(correct)
         this.answer = ''
@@ -43,24 +42,35 @@ export default {
     }
   },
   mounted () {
-    for (let i = 1; i <= this.$store.state.idiomTime; i++) {
+    for (let i = 1; i < this.$store.state.idiomTime; i++) {
       setTimeout(() => {
         this.time -= 1
       }, 1000 * i)
     }
+    setTimeout(() => {
+      this.time -= 1
+    }, 1000 * this.$store.state.idiomTime)
   },
   watch: {
-    idx: function () {
-      this.time = this.$store.state.idiomTime
-      for (let i = 1; i < this.$store.state.idiomTime; i++) {
+    idx: function (newValue) {
+      if (newValue === this.cnt) {
+        this.$store.commit('setIdiomStage', 2)
+      } else {
+        this.time = this.$store.state.idiomTime
+        for (let i = 1; i < this.$store.state.idiomTime; i++) {
+          setTimeout(() => {
+            this.time -= 1
+          }, 1000 * i)
+        }
         setTimeout(() => {
           this.time -= 1
-        }, 1000 * i)
+        }, 1000 * this.$store.state.idiomTime)
       }
     },
-    time (newValue, _oldValue) {
+    time (newValue) {
       if (newValue === 0) {
         console.log('게임 오버')
+        this.$store.commit('setIdiomStage', 2)
       }
     }
   }

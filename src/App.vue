@@ -83,6 +83,7 @@ export default {
         this.$store.commit('setIdioms', [])
         this.$store.commit('setIdiomCnt', 0)
         this.$store.commit('setIdiomTime', 0)
+        this.$store.commit('setIdiomCorrectCnt', 0)
       }
     }
   }

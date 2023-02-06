@@ -6,7 +6,8 @@ export default createStore({
     idiomStage: 0,
     idioms: [],
     idiomCnt: 0,
-    idiomTime: 0
+    idiomTime: 0,
+    idiomCorrectCnt: 0
   },
   getters: {
   },
@@ -25,6 +26,9 @@ export default createStore({
     },
     setIdiomTime (state, time) {
       state.idiomTime = time
+    },
+    setIdiomCorrectCnt (state, cnt) {
+      state.idiomCorrectCnt = cnt
     }
   },
   actions: {
