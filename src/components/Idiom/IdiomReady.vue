@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import beepSrc from '@/assets/beep.mp3'
+// import beepSrc from '@/assets/beep.mp3'
 import idioms from '@/assets/idioms.json'
 import randomPickArr from '@/utils/randomPickArr'
 
@@ -72,19 +72,18 @@ export default {
 
       // 타이머 실행
       this.showTimer = true
-      const audio = new Audio(beepSrc)
-      audio.volume = 1
-      audio.play()
-      // for (let i = 1; i < 5; i++) {
-      //   setTimeout(() => {
-      //     audio.play()
-      //     this.time -= 1
-      //   }, 1000 * i)
-      // }
-      // setTimeout(() => {
-      //   this.$store.commit('setIdiomStage', 1)
-      // }, 5000)
-      this.$store.commit('setIdiomStage', 1)
+      // const audio = new Audio(beepSrc)
+      // audio.volume = 1
+      // audio.play()
+      for (let i = 1; i < 5; i++) {
+        setTimeout(() => {
+          // audio.play()
+          this.time -= 1
+        }, 1000 * i)
+      }
+      setTimeout(() => {
+        this.$store.commit('setIdiomStage', 1)
+      }, 5000)
     }
   }
 }

@@ -72,11 +72,17 @@ section {
 export default {
   name: 'App',
   watch: {
-    $route (to, _from) {
+    $route (to) {
       if (to.path === '/') {
         this.$store.commit('changeIsHome', true)
       } else {
         this.$store.commit('changeIsHome', false)
+      }
+      if (to.path !== '/idiom') {
+        this.$store.commit('setIdiomStage', 0)
+        this.$store.commit('setIdioms', [])
+        this.$store.commit('setIdiomCnt', 0)
+        this.$store.commit('setIdiomTime', 0)
       }
     }
   }

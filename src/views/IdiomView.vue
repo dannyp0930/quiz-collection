@@ -16,8 +16,6 @@ export default {
   components: {
     IdiomReady,
     IdiomStart
-  },
-  data () {
   }
 }
 </script>

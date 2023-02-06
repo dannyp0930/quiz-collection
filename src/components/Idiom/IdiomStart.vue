@@ -41,13 +41,29 @@ export default {
         this.answer = ''
       }
     }
+  },
+  mounted () {
+    for (let i = 1; i <= this.$store.state.idiomTime; i++) {
+      setTimeout(() => {
+        this.time -= 1
+      }, 1000 * i)
+    }
+  },
+  watch: {
+    idx: function () {
+      this.time = this.$store.state.idiomTime
+      for (let i = 1; i < this.$store.state.idiomTime; i++) {
+        setTimeout(() => {
+          this.time -= 1
+        }, 1000 * i)
+      }
+    },
+    time (newValue, _oldValue) {
+      if (newValue === 0) {
+        console.log('게임 오버')
+      }
+    }
   }
-  // mounted () {
-  //   for (let i = 1; i <= this.$store.state.idiomTime; i++) {
-  //     setTimeout(() => {
-  //       this.time -= 1
-  //     }, 1000 * i)
-  //   }
-  // }
+
 }
 </script>
